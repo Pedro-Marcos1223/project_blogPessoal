@@ -21,12 +21,29 @@ public class Usuario {
 	private String nome;
 	
 	@NotNull
+	@Size(min = 2, max = 400)
+	private String foto;
+	
+	@NotNull
 	@Size(min = 5, max = 100)
 	private String usuario;
 	
 	@NotNull
 	@Size(min = 5, max = 80)
 	private String senha;
+
+	
+	
+	public Usuario(Long id, String nome, String foto, String usuario, String senha) {
+		this.id = id;
+		this.nome = nome;
+		this.foto = foto;
+		this.usuario = usuario;
+		this.senha = senha;
+	}
+
+	public Usuario() {}
+
 
 	public Long getId() {
 		return id;
@@ -44,6 +61,14 @@ public class Usuario {
 		this.nome = nome;
 	}
 
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
 	public String getUsuario() {
 		return usuario;
 	}
@@ -59,6 +84,7 @@ public class Usuario {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+	
 	
 	
 }
