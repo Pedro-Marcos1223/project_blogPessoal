@@ -20,7 +20,6 @@ public class Usuario {
 	@Size(min = 1, max = 120)
 	private String nome;
 	
-	@NotNull
 	@Size(min = 2, max = 400)
 	private String foto;
 	
@@ -44,7 +43,7 @@ public class Usuario {
 
 	public Usuario() {}
 
-
+	
 	public Long getId() {
 		return id;
 	}

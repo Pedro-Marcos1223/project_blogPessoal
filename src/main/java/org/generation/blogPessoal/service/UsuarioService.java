@@ -71,20 +71,6 @@ public class UsuarioService {
 		}
 		
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado!", null);
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}	
 	
 }
