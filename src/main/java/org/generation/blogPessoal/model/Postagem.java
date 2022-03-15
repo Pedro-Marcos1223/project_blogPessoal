@@ -1,5 +1,6 @@
 package org.generation.blogPessoal.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -10,8 +11,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -21,28 +25,32 @@ public class Postagem {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 
-	@NotNull
-	@Size(min = 5, max = 100)
+	@NotBlank(message = "O atributo titulo é obrigatorio!")
+	@Size(min = 5, max = 100, message = "O atributo titulo deve conter no maximo 100 caracteres.")
 	private String titulo;
 
-	@NotNull
-	@Size(min = 5, max = 2000)
+	@NotBlank(message = "O atributo texto é obrigatorio")
+	@Size(min = 5, max = 2000, message = "O atributo texto deve conter no minimo 5 caractéres e no maximo 2000.")
 	private String texto;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date date = new java.sql.Date(System.currentTimeMillis());
+	@UpdateTimestamp
+	private LocalDate data;
 
 	@ManyToOne
 	@JsonIgnoreProperties("postagem")
 	private Tema tema;
+	
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private Usuario usuario;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -62,12 +70,12 @@ public class Postagem {
 		this.texto = texto;
 	}
 
-	public Date getDate() {
-		return date;
+	public LocalDate getData() {
+		return data;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setData(LocalDate data) {
+		this.data = data;
 	}
 
 	public Tema getTema() {
@@ -77,5 +85,13 @@ public class Postagem {
 	public void setTema(Tema tema) {
 		this.tema = tema;
 	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}	
 
 }
