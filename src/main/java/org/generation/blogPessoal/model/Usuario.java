@@ -28,9 +28,6 @@ public class Usuario {
 	@Size(min = 2, max = 500)
 	private String nome;
 	
-	@Size(max = 5000, message = "O link da foto não pode ser maior que 5000 caractéres")
-	private String foto;
-	
 	@NotNull(message = "O atributo Usuário é Obrigatório!")
 	@Email(message = "O atributo Usuário deve ser um email válido!")
 	@Size(min = 2, max = 200)
@@ -39,18 +36,26 @@ public class Usuario {
 	@NotBlank
 	@Size(min = 8, message = "A senha deve ter no minimo 8 caractéres")
 	private String senha;
+	
+	@Size(max = 5000, message = "O link da foto não pode ser maior que 5000 caractéres")
+	private String foto;
+	
+	private String tipo;
 
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuario")
 	private List<Postagem> postagem;
 	
 	
-	public Usuario(Long id, String nome, String foto, String usuario, String senha) {
+	
+	
+	public Usuario(Long id, String nome, String foto, String usuario, String senha, String tipo) {
 		this.id = id;
 		this.nome = nome;
 		this.foto = foto;
 		this.usuario = usuario;
 		this.senha = senha;
+		this.tipo = tipo;
 	}
 
 	public Usuario() {}
@@ -102,6 +107,14 @@ public class Usuario {
 
 	public void setPostagem(List<Postagem> postagem) {
 		this.postagem = postagem;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 	
 	
